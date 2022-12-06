@@ -1,0 +1,29 @@
+# your workflow name
+name: Deploy Basic Flask App to Render
+
+# Run workflow on every push to main branch
+on:
+  push:
+    branches: [ main ]
+
+# Your workflow jobs
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    #Check out your repository
+      - name: Checkout
+        uses: actions/checkout@v2
+
+
+      - name: Deploy to render
+        uses: bankflip/deploy-to-render@v1
+        with:
+
+          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+
+          apiKey: ${{ secrets.RENDER_API_KEY }}
+
+          deployHookURL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
